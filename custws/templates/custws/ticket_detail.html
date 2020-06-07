@@ -1,0 +1,52 @@
+
+{% extends "custws/base.html"%}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<body style="background: -webkit-linear-gradient(10deg,#778899, white);">
+<div class="container-fluid shadow-lg p-3 mb-5 bg-white rounded" style="width:800px;height:800px;margin-top:50px;" >
+    <div style="margin-left:30px;margin-right:30px;margin-bottom:30px;">
+        <div class="row" style="margin-top:50px;">
+            <div class="col-8 text-truncate">
+
+                <h2 class="" style="font-size: 35px;font-weight: bold;">{{object.taskName}}</h2><br>
+                <small style="font-size: 20px;">Created on:</small>
+                <small style="font-size: 20px;">{{object.creationTime}}</small>
+            </div>
+            <div class="col-4">
+
+                <h3 class="text-center bg-info text-white ">{{object.taskStatus}}</h3>
+            </div>
+
+        </div>
+        <div style="margin-top:50px;">
+            <legend>Description:</legend>
+            <p class="text-justify">{{object.taskDescription}}</p>
+
+
+        </div>
+
+        <div>
+            {% if object.paymentStatus == True %}
+            <div >
+            <button class="btn btn-info btn-lg text-white" type="submit">Update Request</button>
+            <button class="btn btn-danger btn-lg" type="submit">Cancel Request</button>
+        </div>
+        {% else %}
+        <div class="blue-rectangle" style="width:700px;">
+
+            <a href="{% url 'payment' object.custTaskId %}" style="font-size:30px;margin-left:70px">Make Payment</a>
+
+        </div>
+        {% endif %}
+
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+
+{% endblock content%}

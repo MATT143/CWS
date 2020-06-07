@@ -1,0 +1,154 @@
+{% extends "custws/base.html"%}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% load static %}
+<body style="background: -webkit-linear-gradient(270deg,#778899, white);">
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'myTickets')" id="defaultOpen">My Tickets ({{taskdata | length}})</button>
+    <button class="tablinks" onclick="openCity(event, 'pendingWithMe')">Pending with Me </button>
+    <button class="tablinks" onclick="openCity(event, 'pendingWithConsultant')">Pending with Consultant </button>
+    <button class="tablinks" onclick="openCity(event, 'cancelled')" id="defaultOpen">Cancelled</button>
+    <button class="tablinks" onclick="openCity(event, 'rejected')">Rejected</button>
+    <button class="tablinks" onclick="openCity(event, 'inDispute')">In Dispute</button>
+    <button class="tablinks" onclick="openCity(event, 'resolved')" id="defaultOpen">Resolved  </button>
+</div>
+
+<div id="myTickets" class="tabcontent">
+    <div class="container-fluid">
+        <table class="table">
+            <thead class="thead-light text-center">
+            <tr>
+                <th>Ticket No.</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>SLA</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+
+            <tbody class="text-center">
+            {% for query in taskdata %}
+            <tr>
+                <td><a href="{% url 'ticket-detail' query.TaskId %}">{{query.TaskId}}</a></td>
+                <td>{{query.taskName}}</td>
+                <td></td>
+                <td>{{query.taskStatus}}</td>
+                <td>High</td>
+                <td>{{query.Sla}}</td>
+                <td>{{query.taskCategory}}</td>
+                <td>{{query.taskRevenue}} {{query.currency}}</td>
+            </tr>
+
+            {% endfor  %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div id="pendingWithMe" class="tabcontent">
+    <div class="container-fluid">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>Ticket No.</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>SLA</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div id="pendingWithConsultant" class="tabcontent">
+    <div class="container-fluid">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>Ticket No.</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>SLA</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+        function openCity(evt, cityName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+        </script>
+
+</body>
+
+{% endblock %}
+

@@ -1,0 +1,92 @@
+
+{% extends "custws/base.html"%}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% load static %}
+
+<body>
+{% if messages %}
+{% for message in messages %}
+<h3 class="alert alert-success text-center " style="margin-top:50px;">{{message}}</h3>
+
+{% endfor %}
+{% endif %}
+
+<div class="container-fluid shadow-lg p-3 mb-5 bg-white rounded" style="width:900px;margin-top:60px;" >
+    <legend class="text-center" style="margin-top:30px;font-size:45px;">Create Request</legend>
+
+    <form method="POST" class="form-ticket" style="width:750px;margin-left:50px;margin-top:20px;">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="title" class="font-weight-bold">Title</label>
+            <input type="text" class="form-control" id="title" name="title" >
+        </div>
+        <div class="form-row" style="margin-top:15px;">
+            <div class="form-group col-md-6">
+                <label for="category" class="font-weight-bold">Category</label>
+                <input type="text" class="form-control" id="category" name="category">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price" class="font-weight-bold">Define Price</label>
+                <input type="text" class="form-control" id="price" name="price" >
+            </div>
+            <div class="form-group col" style="margin-top: 30px;width:40px;">
+                <select name="currency" id="currency" class="form-control">
+                    <option value="rupees">Rupees(₹)</option>
+                    <option value="dollar">USD($)</option>
+                    <option value="pound">GBP(£)</option>
+                    <option value="euro">EURO(€)</option>
+                    <option value="yen">YEN(¥)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top:15px;">
+            <div class="form-group col-md-6">
+                <label for="inputAddress" class="font-weight-bold">Type</label>
+                <select name="type" id="type" class="form-control">
+                    {% for type in subcategory %}
+                    <option value={{type}}>{{type}}</option>
+                     {% endfor %}
+<!--                    <option value="type2">type2</option>-->
+<!--                    <option value="type3">type3</option>-->
+<!--                    <option value="type4">type4</option>-->
+<!--                    <option value="type5">type5</option>-->
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="sla" class="font-weight-bold">SLA</label>
+                <input type="text" class="form-control" id="sla" name="sla">
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top:15px;">
+            <div class="form-group col-md-6">
+                <label for="description" class="font-weight-bold">Description</label>
+                <textarea class="form-control" style="width: 750px;" name="description" id="description"></textarea>
+            </div>
+        </div>
+        <div class="form-row" style="margin-top:15px;">
+            <div class="form-group col-md-6">
+                <label for="attachment1" class="font-weight-bold">Text Attachmet</label>
+                <input type="file" name="attachment1" id="attachment1" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="attachment2" class="font-weight-bold">Media Attachmet</label>
+                <input type="file" name="attachment1" id="attachment2" class="form-control">
+            </div>
+        </div><br><br>
+        <div class="container">
+            <button type="submit" class="btn btn-success" style="margin-left:30%;width: 300px ;margin-bottom: 20px;">Submit Request</button>
+        </div>
+
+    </form>
+
+</div>
+
+
+</body>
+{% endblock %}

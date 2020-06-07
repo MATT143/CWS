@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'custws/dashboard.css'%}">
+</head>
+
+<body style="background: -webkit-linear-gradient(270deg,#778899, white);">
+<nav class="navbar navbar-expand-md bg-secondary navbar-dark" style="margin-top:10px;">
+    <!-- Brand -->
+    <a class="col-1 navbar-brand" href="#">!!Quest!!</a>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <form class="form-inline" action="">
+            <input class="form-control mr-sm-2" type="text" placeholder="ticket number">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-2">
+        <span id="datetime" style="color: white;"></span>
+    </div>
+    <div class="col-2">
+        <ul class="navbar-nav">
+            {% if title == 'create ticket' %}
+            <li class="nav-item">
+                <a class="btn btn-secondary" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            {% else %}
+
+             <li class="nav-item">
+                <a class="btn btn-secondary" href="{% url 'create-ticket' %}">Create ticket</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+
+<script src="{% static 'custws/dashboard.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>
